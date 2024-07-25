@@ -14,22 +14,22 @@
 // })
 
 import express from 'express';
+import authRoutes from './src/authRoutes.js';
 import aplicationRouter from './src/aplications/router.js';
 import errorHandler from './src/middleware/errorHandle.js';
 
 const app = express();
 const port = 3000;
 
-app.use(errorHandler);
 app.use(express.json());
+app.use(errorHandler);
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+//buat login & register
+app.use('/auth', authRoutes); 
 
-app.use('/app', aplicationRouter);
+//buat Controller
+app.use('/app', aplicationRouter); 
 
 app.listen(port, () => {
   console.log(`app running at http://localhost:${port}`);
 });
-
